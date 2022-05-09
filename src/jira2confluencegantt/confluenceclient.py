@@ -39,12 +39,14 @@ class ConfluenceClient:
         if not confluence_api:
             raise Exception("Confluence password is invalid")
         try:
+            with open('.confluence_api', 'r') as f:
+                api_token = f.read().rstrip()
             self.__confluence_client: Confluence = Confluence(
                 #url=confluence_url,
                 #username=confluence_username,
                 #password=confluence_password,
                 options={'server': confluence_url},
-                basic_auth=(confluence_username, confluence_api)
+                basic_auth=(confluence_username, api_token)
             )
         except Exception as error:
             raise Exception("Failed to create Confluence client") from error

@@ -43,12 +43,14 @@ class JiraClient:
             raise Exception("Jira password is invalid")
         try:
             #jira no longer accepts password auth, need API token
+            with open('.jira_api', 'r') as f:
+                api_token = f.read().rstrip()
             self.__jira_client: Jira = Jira(
                 #url=jira_url,
                 #username=jira_username,
                 #password=jira_password,
                 options={'server': jira_url},
-                basic_auth=(jira_username, jira_api)
+                basic_auth=(jira_username, api_token)
             )
         except Exception as error:
             raise Exception("Failed to create Jira client") from error
