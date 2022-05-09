@@ -54,8 +54,8 @@ def _create_argument_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--api_key",
-        type=argparse.FileType('r'),
-        #action=LoadFromFile,
+        type=open,
+        action=LoadFromFile,
         help="Define the api_key file to connect to Atlassian server",
         dest="atlassian_api",
     )

@@ -22,7 +22,7 @@ class JiraClient:
         jira_url: str,
         jira_username: str,
         #jira_password: str,
-        jira_api: file,
+        jira_api: str,
     ):
         """
         Constructs the Jira client.
