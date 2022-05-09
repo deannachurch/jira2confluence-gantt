@@ -20,7 +20,7 @@ class ConfluenceClient:
         self,
         confluence_url: str,
         confluence_username: str,
-        confluence_password: str,
+        confluence_api: str,
     ):
         """
         Constructs the Confluence client.
@@ -36,13 +36,15 @@ class ConfluenceClient:
             raise Exception("Confluence URL is invalid")
         if not confluence_username:
             raise Exception("Confluence username is invalid")
-        if not confluence_password:
+        if not confluence_api:
             raise Exception("Confluence password is invalid")
         try:
             self.__confluence_client: Confluence = Confluence(
-                url=confluence_url,
-                username=confluence_username,
-                password=confluence_password,
+                #url=confluence_url,
+                #username=confluence_username,
+                #password=confluence_password,
+                options={'server': confluence_url},
+                basic_auth=(confluence_username, confluence_api)
             )
         except Exception as error:
             raise Exception("Failed to create Confluence client") from error

@@ -53,10 +53,11 @@ def _create_argument_parser() -> argparse.ArgumentParser:
         dest="atlassian_user",
     )
     parser.add_argument(
-        "--password",
-        action="store",
-        help="Define the password to connect to Atlassian server",
-        dest="atlassian_password",
+        "--api_key",
+        type=open,
+        action=LoadFromFile,
+        help="Define the api_key file to connect to Atlassian server",
+        dest="atlassian_api",
     )
     return parser
 
@@ -87,8 +88,8 @@ def main() -> None:
 
     if args.atlassian_user is None:
         args.atlassian_user = str(input("Enter login for Atlassian :\n"))
-    if args.atlassian_password is None:
-        args.atlassian_password = _input_password()
+    if args.atlassian_api is None:
+        args.atlassian_api = _input_password()
 
     # Get configuration from JSON/YAML file
     config = load_config(args.config)
@@ -98,13 +99,13 @@ def main() -> None:
     jira_client = JiraClient(
         config.jira,
         args.atlassian_user,
-        args.atlassian_password,
+        args.atlassian_api,
     )
     confluence_client = None
     if config.confluence:
         confluence_client = ConfluenceClient(
             config.confluence,
             args.atlassian_user,
-            args.atlassian_password,
+            args.atlassian_api,
         )
     generate_all_reports(jira_client, config, confluence_client)

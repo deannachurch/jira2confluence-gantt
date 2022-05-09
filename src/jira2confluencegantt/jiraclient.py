@@ -21,7 +21,8 @@ class JiraClient:
         self,
         jira_url: str,
         jira_username: str,
-        jira_password: str,
+        #jira_password: str,
+        jira_api: str,
     ):
         """
         Constructs the Jira client.
@@ -38,13 +39,16 @@ class JiraClient:
             raise Exception("Jira URL is invalid")
         if not jira_username:
             raise Exception("Jira username is invalid")
-        if not jira_password:
+        if not jira_api:
             raise Exception("Jira password is invalid")
         try:
+            #jira no longer accepts password auth, need API token
             self.__jira_client: Jira = Jira(
-                url=jira_url,
-                username=jira_username,
-                password=jira_password,
+                #url=jira_url,
+                #username=jira_username,
+                #password=jira_password,
+                options={'server': jira_url},
+                basic_auth=(jira_username, jira_api)
             )
         except Exception as error:
             raise Exception("Failed to create Jira client") from error
