@@ -43,7 +43,7 @@ class JiraClient:
             raise Exception("Jira password is invalid")
         try:
             #jira no longer accepts password auth, need API token
-            with open('.jira_api', 'r') as f:
+            with open(atlassian_api, 'r') as f:
                 api_token = f.read().rstrip()
             self.__jira_client: Jira = Jira(
                 #url=jira_url,
