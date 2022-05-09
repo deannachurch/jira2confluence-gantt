@@ -49,6 +49,7 @@ class JiraClient:
                 #url=jira_url,
                 #username=jira_username,
                 #password=jira_password,
+                print(jira_api)
                 options={'server': jira_url},
                 basic_auth=(jira_username, jira_api)
             )
