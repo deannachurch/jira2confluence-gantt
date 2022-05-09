@@ -94,7 +94,7 @@ def main() -> None:
     if args.atlassian_user is None:
         args.atlassian_user = str(input("Enter login for Atlassian :\n"))
     if args.atlassian_api is None:
-        args.atlassian_api = _input_password()
+        args.atlassian_api = str(input("Enter file with api key"))
 
     # Get configuration from JSON/YAML file
     config = load_config(args.config)
