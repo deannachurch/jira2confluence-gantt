@@ -19,17 +19,17 @@ class LoadFromFile (argparse.Action):
             # parse arguments in the file and store them in the target namespace
             parser.parse_args(f.read().split(), namespace)
 
-def _input_password() -> str:
-    """
-    Get password input by masking characters.
-    Similar to getpass() but works with cygwin.
-    """
-    sys.stdout.write("Password :\n")
-    sys.stdout.flush()
-    subprocess.check_call(["stty", "-echo"])
-    password = input()
-    subprocess.check_call(["stty", "echo"])
-    return password
+#def _input_password() -> str:
+#    """
+#    Get password input by masking characters.
+#    Similar to getpass() but works with cygwin.
+#    """
+#    sys.stdout.write("Password :\n")
+#    sys.stdout.flush()
+#    subprocess.check_call(["stty", "-echo"])
+#    password = input()
+#    subprocess.check_call(["stty", "echo"])
+#    return password
 
 
 def _create_argument_parser() -> argparse.ArgumentParser:
