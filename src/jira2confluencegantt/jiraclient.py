@@ -45,11 +45,11 @@ class JiraClient:
             #jira no longer accepts password auth, need API token
             #with open(jira_api, 'r') as f:
             #    api_token = f.read().rstrip()
+            print(jira_api)
             self.__jira_client: Jira = Jira(
                 #url=jira_url,
                 #username=jira_username,
                 #password=jira_password,
-                print(jira_api)
                 options={'server': jira_url},
                 basic_auth=(jira_username, jira_api)
             )
